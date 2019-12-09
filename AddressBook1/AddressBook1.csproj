@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20191201193000_initial.cs" />
+    <Compile Remove="Migrations\20191201193000_initial.Designer.cs" />
+    <Compile Remove="Migrations\20191202173857_tablesUpdate.cs" />
+    <Compile Remove="Migrations\20191202173857_tablesUpdate.Designer.cs" />
+    <Compile Remove="Migrations\20191203070504_Keys.cs" />
+    <Compile Remove="Migrations\20191203070504_Keys.Designer.cs" />
+    <Compile Remove="Migrations\20191203074824_tables.cs" />
+    <Compile Remove="Migrations\20191203074824_tables.Designer.cs" />
+    <Compile Remove="Migrations\20191203075533_tables.cs" />
+    <Compile Remove="Migrations\20191203075533_tables.Designer.cs" />
+    <Compile Remove="Migrations\20191203075607_tables.cs" />
+    <Compile Remove="Migrations\20191203075607_tables.Designer.cs" />
+    <Compile Remove="Migrations\20191206170808_contacts.cs" />
+    <Compile Remove="Migrations\20191206170808_contacts.Designer.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,46 @@
+﻿@page
+@model AddressBook1.Pages.CreateModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<!--Create User-->
+<form method="post">
+    <div>
+        <input name="firstName" placeholder="Firstname" />
+    </div>
+    <br />
+    <div>
+        <input name="lastName" placeholder="Lastname.." />
+    </div>
+    <br />
+    <div id="addEmail">
+        <input name="email" placeholder="Email Address.." />
+        <input type="button" name="addEmail" value="add email" class="addEmail" onclick="javascript: AddEmail();" />
+    </div>
+    <br />
+    <div id="addNumber">
+        <input name="number" placeholder="Number.." />
+        <input type="button" name="addNumber" value="add Number" class="addNumber" onclick="javascript: AddNumber();" />
+    </div>
+    <br />
+    <input type="submit" value="Create User" class="btn btn-outline-primary" />
+</form>
+
+<script>
+    function AddEmail() {
+
+        var html = '<div><input name="email" placeholder="Email.." /></div>'
+
+        $('#addEmail').append(html)
+    }
+</script>
+
+<script>
+    function AddNumber() {
+
+        var html = '<div><input name="number" placeholder="Number.." /></div>'
+
+        $('#addNumber').append(html)
+    }
+</script>

@@ -1,0 +1,128 @@
+﻿@page "{search?}"
+@model AddressBook1.Pages.UserDetailsModel
+@{
+    ViewData["Title"] = "UserDetails";
+}
+
+
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<form method="post">
+    <Input type="text" name="search" method="post"/>
+    <Input type="submit" class="btn btn-outline-primary" asp-page-handler="Search" />
+</form>
+<br />
+
+<table>
+    <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var contact in Model.Contacts)
+        {
+            var c = System.Web.HttpUtility.JavaScriptStringEncode(Json.Serialize(contact).ToString());
+            <tr>
+                <td>@contact.FirstName</td>
+                <td>@contact.LastName</td>
+                <td><button type="button" class="btn btn-primary" onclick="javascript: Edit('@c');">Edit User</button></td>
+                <td>
+                    <form method="post">
+                        <input type="hidden" asp-for="@contact.ContactId" name="id" asp-action="DeleteUser" />
+                        <input type="submit" value="Delete" class="btn btn-danger" asp-page-handler="Delete" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+<!--Create User redirect-->
+<a class="btn btn-outline-primary" text-dark" asp-area="" asp-page="./Create">Create user</a>
+
+<!-- Modal -->
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="UpdateUserModal" class="modal-body">
+                    <!--Built With Js-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" asp-page-handler="Update" value="Save changes"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!--JS Edit User Function-->
+<script>
+    function Edit(contact) {
+        var c = JSON.parse(contact)
+        var html = '<div class="form-group">'
+        html += '<label>FirstName</label>'
+        html += `<input type="hidden" name="contactId" value="${c.contactId}">`
+        html += `<input name="firstName" value="${c.firstName}">`
+        html += '</div>'
+        html += '<div class="form-group">'
+        html += '<label>LastName</label>'
+        html += `<input name="lastName" value="${c.lastName}">`
+        html += '</div>'
+        if (c.contactEmailAddress) {
+            c.contactEmailAddress.forEach(function (x) {
+                html += '<div class="form-group">'
+                html += '<label>Email</label>'
+
+                html += `<input name="email" value="${x.email}">`
+                html += '</div>'
+            })
+        }
+        if (c.phoneNumbers) {
+            c.phoneNumbers.forEach(function (x) {
+                html += '<div class="form-group">'
+                html += '<label>Number</label>'
+                html += `<input name="number" value="${x.numbers}">`
+                html += '</div>'
+            })
+        }
+        $('#UpdateUserModal').html(html)
+        $('#editUserModal').modal('toggle')
+    }
+</script>
+
+
+
+
